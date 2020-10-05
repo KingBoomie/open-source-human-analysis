@@ -17,7 +17,7 @@ all for [gamithra mood](https://github.com/open-source-person/gamithra_mood)
 ![self-worth](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/self-worth.png)
 ![wellbeing](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/wellbeing.png)
 
-### Pairwise correlations
+### Pairwise (pearson) correlations
 ![correlations](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/correlations.png)
 
 ### PCA
