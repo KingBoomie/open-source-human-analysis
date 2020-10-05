@@ -72,7 +72,7 @@ plt.savefig("correlations.png")
 
 # %%
 X = df[features] / 10
-pca = PCA(n_components=1)
+pca = PCA(n_components=2)
 X_transformed = pca.fit_transform(X)
 # %%
 # tdf = pd.DataFrame(X_transformed)
@@ -82,7 +82,7 @@ X_transformed = pca.fit_transform(X)
 # %%
 print("### PCA")
 print("explained variance", pca.explained_variance_ratio_)
-comps = zip(X.columns, pca.components_[0])
-sorted_comps = dict(sorted(comps, key=lambda x: x[1]))
+comps = zip(X.columns, pca.components_[1])
+sorted_comps = dict(sorted(comps, key=lambda x: abs(x[1])))
 print("components", sorted_comps)
 
