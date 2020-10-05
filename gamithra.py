@@ -49,26 +49,11 @@ for key in features:
     plt.savefig(key + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
 # %%
 
-corr_mat = df[features].corr().stack().reset_index(name="correlation")
-
-# Draw each cell as a scatter point with varying size and color
-sns.set_theme(style="whitegrid")
-g = sns.relplot(
-    data=corr_mat,
-    x="level_0", y="level_1", hue="correlation", size="correlation",
-    palette="vlag", hue_norm=(-1, 1), edgecolor=".7",
-    height=6, sizes=(50, 250), size_norm=(-.2, .8),
-)
-
-# Tweak the figure to finalize
-g.set(xlabel="", ylabel="", aspect="equal")
-g.despine(left=True, bottom=True)
-g.ax.margins(.02)
-for label in g.ax.get_xticklabels():
-    label.set_rotation(90)
-for artist in g.legend.legendHandles:
-    artist.set_edgecolor(".7")
-plt.savefig("correlations.png")
+#corr_mat = df[features].corr().stack().reset_index(name="correlation")
+corr = df[features].corr()
+sns.heatmap(corr, annot=True, fmt=".1f")
+# plt.show()
+plt.savefig("correlations.png",dpi=180, pad_inches=1, bbox_inches="tight")
 
 # %%
 X = df[features] / 10
