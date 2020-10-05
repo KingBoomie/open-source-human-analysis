@@ -4,8 +4,8 @@ all for [gamithra mood](https://github.com/open-source-person/gamithra_mood)
 
 # results
 ### Linear regressions
-![belonging](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/belonging.png)
-![focus](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/focus.png)
+![belonging](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/belonging.png)    
+![focus](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/focus.png)    
 ![future](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/future.png)
 ![generosity](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/generosity.png)
 ![gratification](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/gratification.png)

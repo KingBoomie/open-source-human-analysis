@@ -44,9 +44,9 @@ features = ['health', 'self-worth', 'gratitude', 'generosity', 'belonging',
        'future', 'present', 'past', 'gratification', 'focus', 'independence',
             'wellbeing']
 for key in features:
-    sns.lmplot(x='date_delta', y=key, data=df)
-    # plt.show()
-    plt.savefig(key + ".png")
+    sns.lmplot(x='date_delta', y=key, data=df )
+    #plt.show()
+    plt.savefig(key + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
 # %%
 
 corr_mat = df[features].corr().stack().reset_index(name="correlation")
