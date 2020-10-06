@@ -2,6 +2,12 @@
 simple parsing, hack cleaning, dumb quick analysis.    
 all for [gamithra mood](https://github.com/open-source-person/gamithra_mood)
 
+# TOC
+   * [results](#results)
+      * [Linear regressions](#linear-regressions)
+      * [Pairwise (pearson) correlations](#pairwise-pearson-correlations)
+      * [PCA](#pca)
+
 # results
 ### Linear regressions
 ![belonging](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/belonging.png)    
