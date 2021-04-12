@@ -22,7 +22,7 @@ def data_into_dict(data):
     return res
 
 data = []
-for filename in glob(r"C:\Users\Surface\Downloads\gamithra_mood-master\*00"):
+for filename in glob(r"/home/kris/dev/open-source-human-analysis/gamithra_mood/*:00"):
     with open(filename, 'r') as f:
         line = yaml.load(f)
         time = datetime.strptime(line["date"] + " " + line["time"], "%d.%m.%Y %H:%M")
@@ -68,6 +68,6 @@ X_transformed = pca.fit_transform(X)
 print("### PCA")
 print("explained variance", pca.explained_variance_ratio_)
 comps = zip(X.columns, pca.components_[1])
-sorted_comps = dict(sorted(comps, key=lambda x: abs(x[1])))
+sorted_comps = dict(sorted(comps, key=lambda x: abs(x[1]), reverse=True))
 print("components", sorted_comps)
 

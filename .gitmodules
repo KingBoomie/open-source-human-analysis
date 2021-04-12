@@ -1,0 +1,3 @@
+[submodule "gamithra_mood"]
+	path = gamithra_mood
+	url = https://github.com/open-source-person/gamithra_mood.git
