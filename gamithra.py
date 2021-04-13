@@ -1,6 +1,7 @@
 from glob import glob
 from datetime import datetime
 import yaml
+import os
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -35,14 +36,17 @@ df = pd.DataFrame.from_records(data, exclude=["anxiety", "chaos", "depression", 
 df['date_delta'] = (df['time'] - df['time'].min()) / np.timedelta64(1,'D')
 df = df.set_index("time")
 df.sort_index(inplace=True)
-# df.to_csv("gamitra.csv")
+# df.to_csv("gamithra.csv")
 
+# %%
+os.chdir("results")
 # %%
 features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification']
 for key in features:
-    sns.lmplot(x='date_delta', y=key, data=df )
+    sns.lmplot(x='date_delta', y=key, data=df, lowess=True)
     # plt.show()
     plt.savefig(key + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
+
 
 # %%
 fig, axs = plt.subplots(4,3, sharex=True, figsize=(12, 10))
