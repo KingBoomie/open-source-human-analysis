@@ -9,6 +9,10 @@ all for [gamithra mood](https://github.com/open-source-person/gamithra_mood)
       * [PCA](#pca)
 
 # results
+### Cumulative change
+Plot goes up when the measure is on the positive side (> 5), down when on the negative side (< 5). measure == 5 is straight.
+![cumulative](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/cumulative_change.png)
+
 ### Linear regressions
 ![belonging](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/belonging.png)    
 ![focus](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/focus.png)    

@@ -1,14 +1,13 @@
 from glob import glob
-import pandas as pd
-import yaml
 from datetime import datetime
+import yaml
+
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-
 import seaborn as sns
 
-###
-from scipy import linalg
+sns.set()
 
 from sklearn.decomposition import PCA
 # %%
@@ -22,7 +21,7 @@ def data_into_dict(data):
     return res
 
 data = []
-for filename in glob(r"/home/kris/dev/open-source-human-analysis/gamithra_mood/*:00"):
+for filename in glob(r"gamithra_mood/*:00"):
     with open(filename, 'r') as f:
         line = yaml.load(f)
         time = datetime.strptime(line["date"] + " " + line["time"], "%d.%m.%Y %H:%M")
@@ -33,20 +32,28 @@ for filename in glob(r"/home/kris/dev/open-source-human-analysis/gamithra_mood/*
 df = pd.DataFrame.from_records(data, exclude=["anxiety", "chaos", "depression", "melancholy"])
 
 # %%
-df.set_index("time")
+df['date_delta'] = (df['time'] - df['time'].min()) / np.timedelta64(1,'D')
+df = df.set_index("time")
 df.sort_index(inplace=True)
-df.to_csv("gamitra.csv")
-# %%
-df['date_delta'] = (df['time'] - df['time'].min())  / np.timedelta64(1,'D')
+# df.to_csv("gamitra.csv")
 
 # %%
-features = ['health', 'self-worth', 'gratitude', 'generosity', 'belonging',
-       'future', 'present', 'past', 'gratification', 'focus', 'independence',
-            'wellbeing']
+features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification']
 for key in features:
     sns.lmplot(x='date_delta', y=key, data=df )
-    #plt.show()
+    # plt.show()
     plt.savefig(key + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
+
+# %%
+fig, axs = plt.subplots(4,3, sharex=True, figsize=(12, 10))
+for key, ax in zip(features, axs.flat):
+    ax.plot((df[key] - 5).cumsum())
+    ax.set_title(key)
+
+fig.autofmt_xdate()
+# plt.show()
+plt.savefig("cumulative_change.png", dpi=180, pad_inches=1, bbox_inches="tight")
+
 # %%
 
 #corr_mat = df[features].corr().stack().reset_index(name="correlation")
@@ -59,6 +66,7 @@ plt.savefig("correlations.png",dpi=180, pad_inches=1, bbox_inches="tight")
 X = df[features] / 10
 pca = PCA(n_components=2)
 X_transformed = pca.fit_transform(X)
+
 # %%
 # tdf = pd.DataFrame(X_transformed)
 # tdf.columns = ["x", "y"]
