@@ -1,5 +1,7 @@
 from glob import glob
 from datetime import datetime
+from itertools import cycle
+
 import yaml
 import os
 
@@ -40,24 +42,37 @@ df.sort_index(inplace=True)
 
 # %%
 os.chdir("results")
-# %%
 features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification']
-for key in features:
-    sns.lmplot(x='date_delta', y=key, data=df, lowess=True)
-    # plt.show()
-    plt.savefig(key + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
+
+# %%
+# summarise points
+colors = cycle(sns.color_palette("muted"))
+
+fig, axs = plt.subplots(4,3, sharex="all", sharey="all", figsize=(12, 10))
+for key, ax in zip(features, axs.flat):
+    sns.regplot(ax=ax, x=df.index, y=key, data=df, lowess=True, color=next(colors))
+    ax.set_title(key)
+    # ax.set_xlabel("")
+    ax.tick_params(axis='y', labelleft=True)
+
+plt.show()
+sns.despine()
+# plt.savefig("summarise_points.png", dpi=180, pad_inches=1, bbox_inches="tight")
 
 
 # %%
-fig, axs = plt.subplots(4,3, sharex=True, figsize=(12, 10))
+# cumulative change
+colors = cycle(sns.color_palette("muted"))
+
+fig, axs = plt.subplots(4,3, sharex="all", sharey="row", figsize=(12, 10))
 for key, ax in zip(features, axs.flat):
-    ax.plot((df[key] - 5).cumsum())
+    ax.plot((df[key] - 5).cumsum(), color=next(colors))
     ax.set_title(key)
 
 fig.autofmt_xdate()
 # plt.show()
 plt.savefig("cumulative_change.png", dpi=180, pad_inches=1, bbox_inches="tight")
-
+plt.show()
 # %%
 
 #corr_mat = df[features].corr().stack().reset_index(name="correlation")

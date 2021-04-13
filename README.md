@@ -14,18 +14,7 @@ Plot goes up when the measure is on the positive side (> 5), down when on the ne
 ![cumulative](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/cumulative_change.png)
 
 ### Linear regressions
-![belonging](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/belonging.png)    
-![focus](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/focus.png)    
-![future](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/future.png)
-![generosity](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/generosity.png)
-![gratification](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/gratification.png)
-![gratitude](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/gratitude.png)
-![health](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/health.png)
-![independence](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/independence.png)
-![past](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/past.png)
-![present](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/present.png)
-![self-worth](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/self-worth.png)
-![wellbeing](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/wellbeing.png)
+![summary](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/summarise_points.png)    
 
 ### Pairwise (pearson) correlations
 ![correlations](https://raw.githubusercontent.com/KingBoomie/open-source-human-analysis/master/results/correlations.png)
