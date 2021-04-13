@@ -24,7 +24,7 @@ def data_into_dict(data):
     return res
 
 data = []
-for filename in glob(r"gamithra_mood/*:00"):
+for filename in glob(r"./gamithra_mood/*:00"):
     with open(filename, 'r') as f:
         line = yaml.load(f)
         time = datetime.strptime(line["date"] + " " + line["time"], "%d.%m.%Y %H:%M")
@@ -50,7 +50,7 @@ colors = cycle(sns.color_palette("muted"))
 
 fig, axs = plt.subplots(4,3, sharex="all", sharey="all", figsize=(12, 10))
 for key, ax in zip(features, axs.flat):
-    sns.regplot(ax=ax, x=df.index, y=key, data=df, lowess=True, color=next(colors))
+    sns.regplot(ax=ax, x="date_delta", y=key, data=df, lowess=True, color=next(colors))
     ax.set_title(key)
     # ax.set_xlabel("")
     ax.tick_params(axis='y', labelleft=True)
