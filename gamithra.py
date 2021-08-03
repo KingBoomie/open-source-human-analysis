@@ -48,17 +48,16 @@ features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbe
 def plot_reg(df, x, title:str, to_file: bool = False):
     colors = cycle(sns.color_palette("muted"))
 
-    fig, axs = plt.subplots(5, 3, sharex="all", sharey="all", figsize=(12, 12))
+    fig, axs = plt.subplots(5, 3, sharex="all", sharey="all", figsize=(16, 16))
     for key, ax in zip(features, axs.flat):
-        sns.regplot(ax=ax, x=x, y=key, data=df, lowess=True, color=next(colors))
+        sns.regplot(ax=ax, x=x, y=key, data=df, lowess=True, color=next(colors), scatter_kws={'alpha':0.45})
         ax.set_title(key)
         ax.set_xlabel("")
         ax.tick_params(axis='y', labelleft=True)
 
     if to_file:
         plt.savefig(title + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
-    else:
-        plt.show()
+    plt.show()
 
 
 # %%
