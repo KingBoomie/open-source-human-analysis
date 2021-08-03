@@ -45,28 +45,36 @@ os.chdir("results")
 features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification']
 
 # %%
-# summarise points
-colors = cycle(sns.color_palette("muted"))
+def plot_reg(df, x, title:str, to_file: bool = False):
+    colors = cycle(sns.color_palette("muted"))
 
-fig, axs = plt.subplots(4,3, sharex="all", sharey="all", figsize=(12, 10))
-for key, ax in zip(features, axs.flat):
-    sns.regplot(ax=ax, x="date_delta", y=key, data=df, lowess=True, color=next(colors))
-    ax.set_title(key)
-    # ax.set_xlabel("")
-    ax.tick_params(axis='y', labelleft=True)
+    fig, axs = plt.subplots(4, 3, sharex="all", sharey="all", figsize=(12, 10))
+    for key, ax in zip(features, axs.flat):
+        sns.regplot(ax=ax, x=x, y=key, data=df, lowess=True, color=next(colors))
+        ax.set_title(key)
+        ax.set_xlabel("")
+        ax.tick_params(axis='y', labelleft=True)
 
-plt.show()
-sns.despine()
-# plt.savefig("summarise_points.png", dpi=180, pad_inches=1, bbox_inches="tight")
+    if to_file:
+        plt.savefig(title + ".png", dpi=180, pad_inches=1, bbox_inches="tight")
+    else:
+        plt.show()
 
 
 # %%
+# summarise points
+
+plot_reg(df, "date_delta", "summarise_points")
+
+# %%
 # cumulative change
+cumm = (df[features] - 5).cumsum()
+
 colors = cycle(sns.color_palette("muted"))
 
 fig, axs = plt.subplots(4,3, sharex="all", sharey="row", figsize=(12, 10))
 for key, ax in zip(features, axs.flat):
-    ax.plot((df[key] - 5).cumsum(), color=next(colors))
+    ax.plot(cumm[key], color=next(colors))
     ax.set_title(key)
 
 fig.autofmt_xdate()
@@ -75,6 +83,15 @@ plt.savefig("cumulative_change.png", dpi=180, pad_inches=1, bbox_inches="tight")
 plt.show()
 # %%
 
+dcumm = cumm.diff(1)
+dcumm.reset_index(inplace=True)
+
+# %%
+plot_reg(dcumm, dcumm.index, "change_of_change")
+
+#%%
+plt.show()
+# %%
 #corr_mat = df[features].corr().stack().reset_index(name="correlation")
 corr = df[features].corr()
 sns.heatmap(corr, annot=True, fmt=".1f")
