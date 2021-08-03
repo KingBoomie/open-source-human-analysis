@@ -42,13 +42,13 @@ df.sort_index(inplace=True)
 
 # %%
 os.chdir("results")
-features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification']
+features = ['self-worth', 'future', 'past', 'belonging', 'independence', 'wellbeing', 'generosity', 'focus', 'gratitude', 'health', 'present', 'gratification', 'motivation', 'progress']
 
 # %%
 def plot_reg(df, x, title:str, to_file: bool = False):
     colors = cycle(sns.color_palette("muted"))
 
-    fig, axs = plt.subplots(4, 3, sharex="all", sharey="all", figsize=(12, 10))
+    fig, axs = plt.subplots(5, 3, sharex="all", sharey="all", figsize=(12, 12))
     for key, ax in zip(features, axs.flat):
         sns.regplot(ax=ax, x=x, y=key, data=df, lowess=True, color=next(colors))
         ax.set_title(key)
@@ -64,7 +64,7 @@ def plot_reg(df, x, title:str, to_file: bool = False):
 # %%
 # summarise points
 
-plot_reg(df, "date_delta", "summarise_points")
+plot_reg(df, "date_delta", "summarise_points", True)
 
 # %%
 # cumulative change
@@ -72,7 +72,7 @@ cumm = (df[features] - 5).cumsum()
 
 colors = cycle(sns.color_palette("muted"))
 
-fig, axs = plt.subplots(4,3, sharex="all", sharey="row", figsize=(12, 10))
+fig, axs = plt.subplots(5,3, sharex="all", sharey="row", figsize=(12, 12))
 for key, ax in zip(features, axs.flat):
     ax.plot(cumm[key], color=next(colors))
     ax.set_title(key)
@@ -99,7 +99,7 @@ sns.heatmap(corr, annot=True, fmt=".1f")
 plt.savefig("correlations.png",dpi=180, pad_inches=1, bbox_inches="tight")
 
 # %%
-X = df[features] / 10
+X = df[features].fillna(0) / 10
 pca = PCA(n_components=2)
 X_transformed = pca.fit_transform(X)
 
